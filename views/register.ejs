@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <% if(message.length !== 0) {%>
+        <div class="alert alert-<%= status %>" role="alert">
+            <%= message %>
+        </div>
+    <% } %>
+    <div id='login-form'class='login-page'>
+        <div class="form-box">
+         <form id='register' class='input-group' method="post" action="/register">
+            <input type='text'class='input-field'placeholder='Name' required name="name">
+            <input type='email'class='input-field'placeholder='Email' required name="email">
+            <input type='password'class='input-field'placeholder='Password' required name="password">
+            <input type='password'class='input-field'placeholder='Confirm Password' required name="confirmPassword">
+            <button type='submit'class='submit-btn'>Register</button>
+         </form>
+         <a href="/login" class="login-link">Login</a>
+        </div>
+    </div>
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id='login-form'class='login-page'>
+        <div class="form-box">
+          <h1 class="title">Welcome <%= user.name %></h1>
+          <p class="lorem">
+            Lorem ipsum dolor sit amet consec aisicing elit. Voluptate vel optio explicabo doloremque hic libero, eligendi nesciunt officiis. Dolore accusa iatur voluptas optio ducimus neque iusto dolores officiis eos.
+          </p>
+          <form class="logoutForm" action="/logout" method="post">
+              <button type="submit" class="logout">Logout</button>
+          </form>
+        </div>
+    </div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
