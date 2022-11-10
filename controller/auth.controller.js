@@ -19,7 +19,7 @@ export const signUp = async (req, res) => {
         return res.redirect("/register")
       };
       
-      const usersDB = await Users.findOne({ where: {email: email} });
+      const usersDB = await Users.findOne({ where : {email: email} });
       if(usersDB){
         req.flash("status", "danger");
         req.flash("message", "Email has used");
@@ -57,8 +57,8 @@ export const signUp = async (req, res) => {
         return res.redirect('/');
       };
       
-      // balidation
-      const user = await Users.findAll({ where: { email: email} });
+      // validation
+      const user = await Users.findOne({ where: { email: email} });
       
       if(user == 0){
         req.flash("status", "danger");
@@ -66,20 +66,16 @@ export const signUp = async (req, res) => {
         return res.redirect("/login");
       };
        
-      if(user[0].password !== password){
+      if(user.password !== password){
         req.flash("status", "danger");
         req.flash("message", "password was incorect");
         return res.redirect("/login");
       };
       
-      // generate token
-      const token = crypto.randomBytes(30).toString('hex');
-    
-      //  set token 
-       await Users.update({ token: token }, { where: {id: user[0].id}} );
-       res.cookie("token", token);
-
-       res.redirect("/");
+      req.session.login = user.id;
+      req.session.save()
+          
+      res.redirect("/");
     }
     catch (error) {
       console.log(error.message);
@@ -90,8 +86,7 @@ export const signUp = async (req, res) => {
   };
   
   export const logOut = async (req, res) => {
-    res.clearCookie("token");
-    req.flash("status", "success");
-    req.flash("message", "Logout successfully");
+    // res.clearCookie("token");
+    req.session.destroy();
     res.redirect('/login');
 };

@@ -15,10 +15,6 @@ const Users = db.define("users", {
     password: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    token: {
-        type: DataTypes.TEXT,
-        allowNull: true
     }
 },
 {
