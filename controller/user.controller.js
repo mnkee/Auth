@@ -1,5 +1,3 @@
-import Users from "../models/User.model.js";
-
 export const index = async (req, res) => {
   try {
 
@@ -31,6 +29,7 @@ export const login = async (req, res) => {
   if(isAuth){
       return res.redirect('/');
   };
+
   res.render("login", { 
       title: "Login",
       status: req.flash("status"),
