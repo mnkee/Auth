@@ -1,5 +1,4 @@
 import Users from "../models/User.model.js";
-import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -68,12 +67,7 @@ export const signUp = async (req, res) => {
         return res.redirect("/login");
       };
 
-      // generate token 
-       const token = jwt.sign({ id: user.id, name: user.name, email: user.email }, process.env.TOKEN , {
-          expiresIn: "30d",
-       });
-
-      res.cookie("token", token);
+      req.session.auth = user.id;      
       res.redirect("/");
     }
     catch (error) {
@@ -85,7 +79,6 @@ export const signUp = async (req, res) => {
   };
   
   export const logOut = async (req, res) => {
-    // res.clearCookie("token");
     req.session.destroy();
     res.redirect('/login');
 };
