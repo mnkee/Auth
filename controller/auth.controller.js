@@ -1,6 +1,7 @@
 import Users from "../models/User.model.js";
-import crypto from "crypto";
-import { exit } from "process";
+import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const signUp = async (req, res) => {
     try {
@@ -50,17 +51,12 @@ export const signUp = async (req, res) => {
     try{
 
       // get data
-      const tokenClient = req.cookies['token'];
       const { email, password } = req.body;
-      
-      if(tokenClient){
-        return res.redirect('/');
-      };
-      
+
       // validation
       const user = await Users.findOne({ where: { email: email} });
       
-      if(user == 0){
+      if(!user){
         req.flash("status", "danger");
         req.flash("message", `this email is not registered`);
         return res.redirect("/login");
@@ -71,10 +67,13 @@ export const signUp = async (req, res) => {
         req.flash("message", "password was incorect");
         return res.redirect("/login");
       };
-      
-      req.session.login = user.id;
-      req.session.save()
-          
+
+      // generate token 
+       const token = jwt.sign({ id: user.id, name: user.name, email: user.email }, process.env.TOKEN , {
+          expiresIn: "30d",
+       });
+
+      res.cookie("token", token);
       res.redirect("/");
     }
     catch (error) {

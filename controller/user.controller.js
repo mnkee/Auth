@@ -3,8 +3,8 @@ import Users from "../models/User.model.js";
 export const index = async (req, res) => {
   try {
     // const token = req.cookies['token'];
-    const user = await Users.findOne({ where: {id: req.session.login} });
-
+    // const user = await Users.findOne({ where: {id: req.session.login} });
+    const user=false
     user ? res.render("index", { title: "Home", user: user }) : res.render("index", { title: "Home", user: "User tidak ditemukan " });
   }
   catch(error) {

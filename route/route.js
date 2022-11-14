@@ -1,6 +1,6 @@
 import { index, login, register } from "../controller/user.controller.js";
 import { signUp, auth, logOut } from "../controller/auth.controller.js";
-import { validateAuth } from "../middleware/validateAuth";
+import { validateAuth } from "../middleware/validateAuth.js";
 import express from "express"; 
 let router = express.Router();
 
