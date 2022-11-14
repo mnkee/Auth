@@ -26,8 +26,8 @@ app.use(express.urlencoded({ extended: true }));
 
 try{
   await db.authenticate()
+  await Users.sync();
   console.log("database Connected...")
-  await Users.sync()
 }
 catch (error) {
   console.log(error.message)
