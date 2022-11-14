@@ -13,8 +13,8 @@ export const index = async (req, res) => {
 };
 
 export const register = async (req, res) => {
-
-  if(req.session.auth){
+  const isAuth = req.session.auth || req.cookies["auth"];
+  if(isAuth){
       return res.redirect('/');
   };
 
@@ -27,10 +27,10 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   //check token
-  if(req.session.auth){
+  const isAuth = req.session.auth || req.cookies["auth"];
+  if(isAuth){
       return res.redirect('/');
   };
-
   res.render("login", { 
       title: "Login",
       status: req.flash("status"),

@@ -112,7 +112,7 @@ span
 .register-link{
 	position: absolute;
 	left:275px;
-	top: 305px;
+	top: 350px;
 	text-decoration: none;
 	color: #C9D1D9;
 }
@@ -183,4 +183,9 @@ span
 	padding: 0.5rem;
 	margin-top: 1rem;
 	background: transparent;
+}
+
+.remember {
+	margin-top: 20px;
+	color: white;
 }

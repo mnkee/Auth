@@ -4,7 +4,7 @@ dotenv.config();
 
 export const validateAuth = async (req, res, next) => {
   try{
-    const isAuth = req.session.auth;
+    const isAuth = req.session.auth || req.cookies["auth"];
 
     if(isAuth){
       const user = await Users.findOne({ where: {id: isAuth} });

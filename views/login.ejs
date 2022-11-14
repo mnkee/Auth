@@ -18,9 +18,23 @@
          <form id='login' class='input-group' action="/login" method="post">
             <input type='email'class='input-field'placeholder='Email' name="email" required>
             <input type='password'class='input-field'placeholder='Password' name="password" required>
+            <div class="remember">
+                <input
+                type="checkbox"
+                id="check"
+                checked
+                name="remember"
+                />
+                <label for="check"
+                >Remember me</label
+                >
+            </div>
+            
             <button type='submit'class='submit-btn'>Login</button>
          </form>
-         <a href="/register" class="register-link">Register</a>
+         <div>
+             <a href="/register" class="register-link">Register</a>
+         </div>
         </div>
     </div>
 

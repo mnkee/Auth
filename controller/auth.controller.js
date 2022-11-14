@@ -4,6 +4,11 @@ dotenv.config();
 
 export const signUp = async (req, res) => {
     try {
+      const isAuth = req.session.auth || req.cookies["auth"];
+      if(isAuth){
+          return res.redirect('/');
+      };
+
       // get data
       const tokenClient = req.cookies['token'];
       const { name, email, password, confirmPassword } = req.body;
@@ -48,9 +53,14 @@ export const signUp = async (req, res) => {
   
   export const auth = async (req, res) => {
     try{
+      
+      const isAuth = req.session.auth || req.cookies["auth"];
+      if(isAuth){
+          return res.redirect('/');
+      };
 
       // get data
-      const { email, password } = req.body;
+      const { email, password, remember } = req.body;
 
       // validation
       const user = await Users.findOne({ where: { email: email} });
@@ -67,7 +77,7 @@ export const signUp = async (req, res) => {
         return res.redirect("/login");
       };
 
-      req.session.auth = user.id;      
+      remember ? res.cookie("auth", user.id) : req.session.auth = user.id;    
       res.redirect("/");
     }
     catch (error) {
@@ -80,5 +90,6 @@ export const signUp = async (req, res) => {
   
   export const logOut = async (req, res) => {
     req.session.destroy();
+    res.clearCookie("auth")
     res.redirect('/login');
 };
