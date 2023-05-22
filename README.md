@@ -1,3 +1,3 @@
 # Auth
 
-This repo about authentication v:
+A repository for learn about authentication method
